@@ -11,19 +11,27 @@ function App() {
 
   const algorithmOptions = [
     { value: 'Huffman Algorithm', label: 'Huffman Algorithm' },
-    { value: 'Colour Quant Algorithm', label: 'Colour Quant Algorithm' },
-    { value: 'Colour Quant & Huffman Algorithm', label: 'Colour Quant & Huffman Algorithm' },
-    { value: 'Image Diff & Huffman Algorithm', label: 'Image Diff & Huffman Algorithm' },
+    { value: 'Colour Quant and Huffman Algorithm - Quant 256', label: 'Colour Quant and Huffman Algorithm - Quant 256' },
+    { value: 'Colour Quant and Huffman Algorithm - Quant 512', label: 'Colour Quant and Huffman Algorithm - Quant 512' },
+    { value: 'Colour Quant and Huffman Algorithm - Integer Array', label: 'Colour Quant and Huffman Algorithm - Integer Array' },
+    { value: 'Colour Quant and Huffman Algorithm - Byte Array', label: 'Colour Quant and Huffman Algorithm - Byte Array' },
+    { value: 'Image Dithering and Huffman Algorithm', label: 'Image Dithering and Huffman Algorithm' },
   ]
 
   const handleRunAlgorithms = () => {
-    BackendService.getAlgorithms(selectedAlgorithm1, selectedAlgorithm2).then((response) => {
+    console.log(selectedAlgorithm1, selectedAlgorithm2);
+    BackendService.getBackendCheck(selectedAlgorithm1, selectedAlgorithm2).then((response) => {
       console.log(response.data);
-      setLoading(!loading);
     }).catch((error) => {
-      console.error("Error from the backend:", error);
-      setLoading(!loading);
+        console.error("Error from the backend:", error);
     });
+    // BackendService.getAlgorithms(selectedAlgorithm1, selectedAlgorithm2).then((response) => {
+    //   console.log(response.data);
+    //   setLoading(!loading);
+    // }).catch((error) => {
+    //   console.error("Error from the backend:", error);
+    //   setLoading(!loading);
+    // });
   }
 
   return (
@@ -42,7 +50,7 @@ function App() {
             onChange={(option) => setSelectedAlgorithm1(option.target.value)}
             value={selectedAlgorithm1}
             id="algorithm1"
-            className="text-white bg-gray-500 hover:bg-gray-600 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm p-2 w-72 focus:outline-none"
+            className="text-white bg-gray-500 hover:bg-gray-600 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm p-2 w-96 focus:outline-none"
           >
             {(algorithmOptions).map((option) => (
               <option key={option.label} value={option.value}>
@@ -58,7 +66,7 @@ function App() {
             onChange={(option) => setSelectedAlgorithm2(option.target.value)}
             value={selectedAlgorithm2}
             id="algorithm2"
-            className="text-white bg-gray-500 hover:bg-gray-600 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm p-2 w-72 focus:outline-none"
+            className="text-white bg-gray-500 hover:bg-gray-600 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm p-2 w-96 focus:outline-none"
           >
             {(algorithmOptions).map((option) => (
               <option key={option.label} value={option.value}>
@@ -72,7 +80,7 @@ function App() {
           <button
             onClick={handleRunAlgorithms}
             type="button"
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mt-3 w-72 focus:outline-none"
+            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mt-3 w-96 focus:outline-none"
           >
             Run Algorithms
           </button>
