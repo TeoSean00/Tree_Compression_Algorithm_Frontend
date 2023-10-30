@@ -10,28 +10,30 @@ function App() {
   const [selectedAlgorithm2, setSelectedAlgorithm2] = useState('Colour Quant Algorithm');
 
   const algorithmOptions = [
+    { value: 'Original Bad Algorithm', label: 'Original Bad Algorithm' },
     { value: 'Huffman Algorithm', label: 'Huffman Algorithm' },
     { value: 'Colour Quant and Huffman Algorithm - Quant 256', label: 'Colour Quant and Huffman Algorithm - Quant 256' },
     { value: 'Colour Quant and Huffman Algorithm - Quant 512', label: 'Colour Quant and Huffman Algorithm - Quant 512' },
-    { value: 'Colour Quant and Huffman Algorithm - Integer Array', label: 'Colour Quant and Huffman Algorithm - Integer Array' },
-    { value: 'Colour Quant and Huffman Algorithm - Byte Array', label: 'Colour Quant and Huffman Algorithm - Byte Array' },
+    { value: 'Colour Quant and Huffman Algorithm - String Array', label: 'Colour Quant and Huffman Algorithm - String Array' },
     { value: 'Image Dithering and Huffman Algorithm', label: 'Image Dithering and Huffman Algorithm' },
   ]
 
   const handleRunAlgorithms = () => {
-    console.log(selectedAlgorithm1, selectedAlgorithm2);
-    BackendService.getBackendCheck(selectedAlgorithm1, selectedAlgorithm2).then((response) => {
+    // console.log(selectedAlgorithm1, selectedAlgorithm2);
+    // BackendService.getBackendCheck(selectedAlgorithm1, selectedAlgorithm2).then((response) => {
+    //   console.log(response.data);
+    // }).catch((error) => {
+    //     console.error("Error from the backend:", error);
+    // });
+    console.log("frontend sent over request:", selectedAlgorithm1, selectedAlgorithm2);
+    setLoading(true);
+    BackendService.getAlgorithms(selectedAlgorithm1, selectedAlgorithm2).then((response) => {
+      setLoading(false);
       console.log(response.data);
     }).catch((error) => {
-        console.error("Error from the backend:", error);
+      console.error("Error from the backend:", error);
+      setLoading(false);
     });
-    // BackendService.getAlgorithms(selectedAlgorithm1, selectedAlgorithm2).then((response) => {
-    //   console.log(response.data);
-    //   setLoading(!loading);
-    // }).catch((error) => {
-    //   console.error("Error from the backend:", error);
-    //   setLoading(!loading);
-    // });
   }
 
   return (
