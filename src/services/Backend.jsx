@@ -10,6 +10,14 @@ const getBackendCheck = async (algorithm1, algorithm2) => {
   return response
 }
 
+const getSampleAlgorithm = async () => {
+  const response = await axios.get(
+    `${baseURL}/original-algorithm}`
+  )
+  
+  return response;
+}
+
 const getAlgorithms = async (algorithm1, algorithm2) => {
   const response = await axios.get(
     `${baseURL}/algorithms?algo1=${algorithm1}&algo2=${algorithm2}`,
@@ -21,4 +29,5 @@ const getAlgorithms = async (algorithm1, algorithm2) => {
 export default {
   getBackendCheck,
   getAlgorithms,
+  getSampleAlgorithm
 }
